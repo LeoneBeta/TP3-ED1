@@ -1,0 +1,6 @@
+#ifndef LABIRINT_H_INCLUDED
+#define LABIRINT_H_INCLUDED
+
+
+
+#endif

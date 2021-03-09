@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "list.h"
 
 list creatList(){
@@ -12,9 +13,9 @@ list creatList(){
     return l;
 }
 
-int insertStart(list l, TElement e){
-    TNodo *n;
-    n = (TNodo*)malloc(sizeof(TNodo));
+int insertStart(list l, TElementList e){
+    TNodoList *n;
+    n = (TNodoList*)malloc(sizeof(TNodoList));
     if(n){
         n->info = e;
         n->next = l->first;
@@ -30,12 +31,12 @@ int insertStart(list l, TElement e){
         return 0;
 }
 
-int insertEnd(list l, TElement e){
-    TNodo *n;
+int insertEnd(list l, TElementList e){
+    TNodoList *n;
     if(l->first == NULL)
         return insertStart(l,e);
 
-    n = (TNodo*)malloc(sizeof(TNodo));
+    n = (TNodoList*)malloc(sizeof(TNodoList));
     if(n){
         n->info = e;
         n->next = NULL;
@@ -48,8 +49,8 @@ int insertEnd(list l, TElement e){
         return 0;
 }
 
-int insertPosition(list l, TElement e, int position){
-    TNodo *n, *nAux, *ant;
+int insertPosition(list l, TElementList e, int position){
+    TNodoList *n, *nAux, *ant;
     int i;
 
     if(position == 1)
@@ -61,7 +62,7 @@ int insertPosition(list l, TElement e, int position){
             if(position < 1 || position > l->size +1)
                 return 0;
             else{
-                n = (TNodo*)malloc(sizeof(TNodo));
+                n = (TNodoList*)malloc(sizeof(TNodoList));
                 if(!n)
                     return 0;
                 n->info = e;
@@ -77,8 +78,8 @@ int insertPosition(list l, TElement e, int position){
             }
 }
 
-int removeElement(list l, TKey key, TElement *e){
-    TNodo *n;
+int removeElement(list l, TKeyList key, TElementList *e){
+    TNodoList *n;
     n = l->first;
 
     while(n){
@@ -109,7 +110,7 @@ int removeElement(list l, TKey key, TElement *e){
 }
 
 void deleteList(list l){
-    TNodo *n;
+    TNodoList *n;
     while(l->first){
         n = l->first;
         l->first = l->first->next;
@@ -118,9 +119,9 @@ void deleteList(list l){
     free(l);
 }
 
-int getElement(list l, int position, TElement *e){
+int getElement(list l, int position, TElementList *e){
     int i;
-    TNodo *n;
+    TNodoList *n;
 
     if(position < 1 || position > l->size)
         return 0;
@@ -153,7 +154,7 @@ int setCurrent(list l, int position){
     return 1;
 }
 
-int getCurrent(list l, TElement *e){
+int getCurrent(list l, TElementList *e){
     if(l->current){
         *e = l->current->info;
         l->current = l->current->next;
@@ -167,8 +168,8 @@ int emptyList(list l){
 }
 
 int fullList(list l){
-    TNodo *n;
-    n = (TNodo*)malloc(sizeof(TNodo));
+    TNodoList *n;
+    n = (TNodoList*)malloc(sizeof(TNodoList));
     if(n){
         free(n);
         return 0;

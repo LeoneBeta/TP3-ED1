@@ -6,7 +6,7 @@
 #include "utilities.h"
 #include "stack.h"
 #include "list.h"
-#include "matriz.h"
+#include "mLabirint.h"
 #include "labirint.h"
 
 int main(){
@@ -22,7 +22,7 @@ int main(){
     int i, j, integrity;
 
     //Matriz
-    char *mat;
+    char **mat;
     int line,column;
 
     setbuf(stdin,NULL);
@@ -44,10 +44,10 @@ int main(){
         printf("Falha ao abrir o arquivo de Saída %s",nameOutputFile);
     
     //Faz a leitura da primeira linha do arquivo onde contem o tamanho da matriz
-    sizeMat(inputFile,line,column);
+    sizeMat(inputFile,&line,&column);
     
     //Aloca a Matriz dinâmica
-    allocMat(*mat,line,column);
+    allocMat(mat,line,column);
     
     //Monta a matriz retirando os dados do arquivo de entrada
     mountMat(inputFile,mat,column);
@@ -59,17 +59,25 @@ int main(){
     //2 = Número inválido de Saidas
     //3 = Existe algum "buraco" nas bordas da matriz
     integrity = checkIntegrity(mat,line,column);
-    if(integrity == '0')
+    if(integrity == 0)
         printf("\nMatriz Integra");
-    if(integrity == '1')
+    if(integrity == 1)
         printf("\nNúmero inválido de Entradas");
-    if(integrity == '2')
+    if(integrity == 2)
         printf("\nNúmero inválido de Saídas");
-    if(integrity == '3')
+    if(integrity == 3)
         printf("\nMatriz contém uma falha nas suas bordas");
 
-
-    /* Desenvolver a etapa de resolução do labirinto*/
+    /*
+    //Desenvolver a etapa de resolução do labirinto
+    //Caso a Matriz fornecida não for válida, o programa finaliza
+    if(integrity != 0)
+        return 0;
+    solutionLabirint(l,s,*mat);
+    
+    */
+    printf("\nMatriz fornecida no arquivo %s",nameInputFile);
+    printLabirint(mat,line,column);
 
     /*Desenvolver a etapa de printar os resultados */
 

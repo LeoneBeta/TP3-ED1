@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "stack.h"
 
 
@@ -12,7 +13,7 @@ stack creatStack(){
 }
 
 void endStack(stack s){
-    TNodo *n;
+    TNodoStack *n;
     while(s->top){
         n = s->top;
         s->top = s->top->next;
@@ -21,9 +22,9 @@ void endStack(stack s){
     free(s);
 }
 
-int push(stack s,TElement e){
-    TNodo *n;
-    n = (TNodo*)malloc(sizeof(TNodo));
+int push(stack s,TElementStack e){
+    TNodoStack *n;
+    n = (TNodoStack*)malloc(sizeof(TNodoStack));
     if(!n)
         return 0;
     n->info = e;
@@ -33,8 +34,8 @@ int push(stack s,TElement e){
     return 1;
 }
 
-int pop(stack s,TElement *e){
-    TNodo *n;
+int pop(stack s,TElementStack *e){
+    TNodoStack *n;
     if(!s->top)
         return 0;
     n = s->top;
@@ -46,8 +47,8 @@ int pop(stack s,TElement *e){
 }
 
 int fullStack(stack s){
-    TNodo *n;
-    n = (TNodo*)malloc(sizeof(TNodo));
+    TNodoStack *n;
+    n = (TNodoStack*)malloc(sizeof(TNodoStack));
     if(n == NULL)
         return 1;
     free(n);

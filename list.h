@@ -2,18 +2,18 @@
 #define LIST_H_INCLUDED
 
 
-typedef int TKey;
+typedef int TKeyList;
 typedef struct{
-    TKey key;
-}TElement;
+    TKeyList key;
+}TElementList;
 
-typedef struct Nodo{
-    TElement info;
-    struct Nodo *prior, *next;
-}TNodo;
+typedef struct NodoList{
+    TElementList info;
+    struct NodoList *prior, *next;
+}TNodoList;
 
 typedef struct{
-    TNodo *first, *last, *current;
+    TNodoList *first, *last, *current;
     int size;
 }TList;
 
@@ -21,15 +21,15 @@ typedef TList *list;
 
 
 list creatList();
-int insertStart(list,TElement);
-int insertEnd(list,TElement);
-int insertPosition(list,TElement,int);
-int removeElement(list,TKey,TElement*);
+int insertStart(list,TElementList);
+int insertEnd(list,TElementList);
+int insertPosition(list,TElementList,int);
+int removeElement(list,TKeyList,TElementList*);
 void deleteList(list);
-int getElement(list,int,TElement*);
+int getElement(list,int,TElementList*);
 int emptyList(list);
 int fullList(list);
 int setCurrent(list,int);
-int getCurrent(list,TElement*);
+int getCurrent(list,TElementList*);
 
 #endif

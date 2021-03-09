@@ -1,47 +1,49 @@
 #include <stdio.h>
-#include "matriz.h"
+#include <stdlib.h>
+#include <string.h>
+#include "mLabirint.h"
 
 void sizeMat(FILE *inputFile, int *line, int *column){
     int i, j;
-    char sizeMat[10],stringLine[5],stringColumn[5];
+    char size[10],stringLine[5],stringColumn[5];
 
     //Limpando o lixo de memória contido nas strings
     for(i=0;i<5;i++){
-        sizeMat[i] = '\0';
+        size[i] = '\0';
         stringLine[i] = '\0';
         stringColumn[i] = '\0';
     }
 
     j = 0;
     i = 0;
-    fgets(sizeMat,10,inputFile);
+    fgets(size,10,inputFile);
     do{
-        if(sizeMat[i] != 'x' || sizeMat[i] != 'X')
-            stringLine[j] = sizeMat[i];
+        if(size[i] != 'x' || size[i] != 'X')
+            stringLine[j] = size[i];
         else
             break;
         j++;
         i++;
-    }while(i<strlen(sizeMat));
+    }while(i<strlen(size));
 
     j = 0;
     i++;
     do{
-        if(sizeMat[i] != '\0')
-            stringColumn[j] = sizeMat[i];
+        if(size[i] != '\0')
+            stringColumn[j] = size[i];
         else
             break;
         j++;
         i++;
-    }while(i<strlen(sizeMat));
+    }while(i<strlen(size));
 
-    line = atoi(stringLine);
-    column = atoi(stringColumn);
+    *line = atoi(stringLine);
+    *column = atoi(stringColumn);
 }
 
 void allocMat(char **mat, int line, int column){
     int i;
-    mat = (char*)malloc(line*sizeof(char));
+    *mat = (char*)malloc(line*sizeof(char));
     for(i=0;i<line;i++)
         mat[i] = (char*)malloc(column*sizeof(char));
 }
@@ -110,13 +112,13 @@ int checkIntegrity(char **mat, int line, int column){
         return 1; //Matriz com um número inválido de Entradas
     if(S != 1)
         return 2; //Matriz com um número inválido de Saídas
-    if(0 != 0)
+    if(O != 0)
         return 3; //Matriz com algum "buraco" em sua borda
 }
 
-void endMat(char *mat, int line){
-    int i, line;
-    for (i=0; i < line; i++)
-        free (mat[i]) ;
-    free (mat) ;
+void endMat(char **mat, int line){
+    int i;
+    for (i=0;i<line;i++)
+        free(mat[i]);
+    free(mat);
 }

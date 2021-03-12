@@ -45,6 +45,8 @@ int main(){
     
     //Faz a leitura da primeira linha do arquivo onde contem o tamanho da matriz
     sizeMat(inputFile,&line,&column);
+    printf("\nNúmero de Linhas: %d",line);
+    printf("\nNúmero de Colunas: %d",column);
     
     //Aloca a Matriz dinâmica
     allocMat(mat,line,column);

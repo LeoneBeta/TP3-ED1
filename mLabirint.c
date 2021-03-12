@@ -9,16 +9,18 @@ void sizeMat(FILE *inputFile, int *line, int *column){
 
     //Limpando o lixo de memória contido nas strings
     for(i=0;i<5;i++){
-        size[i] = '\0';
         stringLine[i] = '\0';
         stringColumn[i] = '\0';
     }
+    for(i=0;i<10;i++)
+        size[i] = '\0';
 
     j = 0;
     i = 0;
+    fseek(inputFile,0,SEEK_SET);
     fgets(size,10,inputFile);
     do{
-        if(size[i] != 'x' || size[i] != 'X')
+        if(size[i] != 'x')
             stringLine[j] = size[i];
         else
             break;
@@ -29,13 +31,13 @@ void sizeMat(FILE *inputFile, int *line, int *column){
     j = 0;
     i++;
     do{
-        if(size[i] != '\0')
+        if(size[i] != '\n')
             stringColumn[j] = size[i];
         else
             break;
         j++;
         i++;
-    }while(i<strlen(size));
+    }while(i<=strlen(size));
 
     *line = atoi(stringLine);
     *column = atoi(stringColumn);
@@ -52,9 +54,12 @@ void mountMat(FILE *inputeFile, char **mat, int column){
     int i,lin = 0;
     char *string;
 
-    string = (char*)malloc(column*sizeof(char));
+    string = (char*)malloc(column+2*sizeof(char));
 
-    fseek(inputeFile,0,SEEK_SET);
+    /*Problema de falha de segmentação, o comando fgets está copiando apenas 9 caracteres para a 
+    variavel string*/
+
+    fseek(inputeFile,0,SEEK_CUR);
     while(fgets(string,column,inputeFile)){
         for(i=0;i<column;i++){
             mat[lin][i] = string[i];

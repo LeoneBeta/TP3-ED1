@@ -3,7 +3,8 @@
 
 void sizeMat(FILE*,int*,int*);
 void allocMat(char**,int,int);
-void mountMat(FILE*,char**,int);
+void checkCoordinates(FILE*,int*,int*);
+void mountMat(FILE*,char**,int, int*,int*);
 int checkIntegrity(char**,int,int);
 void endMat(char**,int);
 #endif

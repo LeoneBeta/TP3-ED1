@@ -50,7 +50,52 @@ void allocMat(char **mat, int line, int column){
         mat[i] = (char*)malloc(column*sizeof(char));
 }
 
-void mountMat(FILE *inputeFile, char **mat, int column){
+void checkCoordinates(FILE *inputFile, int *e, int *s){
+    int i, j;
+    char coordinates[15], ex[3], ey[3], sx[3], sy[3];
+
+    fseek(inputFile,0,SEEK_CUR);
+    fgets(coordinates,15,inputFile);
+
+    i = 0;
+    j = 0;
+    do{
+        ex[j] = coordinates[i];
+        i++;
+        j++;  
+    }while(coordinates[i] != ' ');
+
+    i++;
+    j = 0;
+    do{
+        ey[j] = coordinates[i];
+        i++;
+        j++;
+    }while(coordinates != ' ');
+    
+    i++;
+    j = 0;
+    do{
+        sx[j] = coordinates[i];
+        i++;
+        j++;
+    }while(coordinates != ' ');
+
+    i++;
+    j = 0;
+    do{
+        sy[j] = coordinates[i];
+        i++;
+        j++;
+    }while(coordinates != '\n');
+
+    e[0] = atoi(ex);
+    e[1] = atoi(ey);
+    s[0] = atoi(sx);
+    s[1] = atoi(sy);
+}
+
+void mountMat(FILE *inputeFile, char **mat, int column, int *e, int *s){
     int i,lin = 0;
     char *string;
 
@@ -59,14 +104,20 @@ void mountMat(FILE *inputeFile, char **mat, int column){
     /*Problema de falha de segmentação, o comando fgets está copiando apenas 9 caracteres para a 
     variavel string*/
 
+    //Testar o fgets com column+1
+
     fseek(inputeFile,0,SEEK_CUR);
-    while(fgets(string,column,inputeFile)){
+    while(fgets(string,column+1,inputeFile)){
         for(i=0;i<column;i++){
             mat[lin][i] = string[i];
         }
         lin++;
         fseek(inputeFile,0,SEEK_CUR);
     }
+
+    //Inserindo as letras E e S na Entrada e Saída do Labirinto
+    mat[e[0]][e[1]] = 'E';
+    mat[s[0]][s[1]] = 'S';
 }
 
 int checkIntegrity(char **mat, int line, int column){

@@ -24,6 +24,11 @@ int main(){
     //Matriz
     char **mat;
     int line,column;
+    int coordinatesE[2], coordinatesS[2];
+    int *ptrE, *ptrS;
+
+    ptrE = &coordinatesE;
+    ptrS = &coordinatesS;
 
     setbuf(stdin,NULL);
     printf("Nome do arquivo de entrada: ");
@@ -43,16 +48,22 @@ int main(){
     if(!outputFile)
         printf("Falha ao abrir o arquivo de Saída %s",nameOutputFile);
     
-    //Faz a leitura da primeira linha do arquivo onde contem o tamanho da matriz
+    //Faz a leitura da primeira linha do arquivo onde contám o tamanho da matriz
     sizeMat(inputFile,&line,&column);
     printf("\nNúmero de Linhas: %d",line);
     printf("\nNúmero de Colunas: %d",column);
     
     //Aloca a Matriz dinâmica
     allocMat(mat,line,column);
-    
+
+    //Faz a leitura da segunda linha da Matriz onde contém as coordenadas de Entrada e Saída
+    checkCoordinates(inputFile,ptrE,ptrS);
+
+
     //Monta a matriz retirando os dados do arquivo de entrada
-    mountMat(inputFile,mat,column);
+    mountMat(inputFile,mat,column,ptrE,ptrS);
+
+    //Setar a entrada e saida com as letras E e S nas suas determinadas posições
     
     //Checa a Integridade da matriz
     //Retornos da Função
@@ -90,7 +101,7 @@ int main(){
     endMat(mat,line);
 
     //Fecha os arquivos
-    fclose(inputFile);    
+    fclose(inputFile);
     fclose(outputFile);
     return 0;
 }

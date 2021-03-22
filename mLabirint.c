@@ -43,11 +43,11 @@ void sizeMat(FILE *inputFile, int *line, int *column){
     *column = atoi(stringColumn);
 }
 
-void allocMat(char **mat, int line, int column){
-    int i;
-    *mat = (char*)malloc(line*sizeof(char));
+void allocMat(char ***mat, int line, int column){
+    int i = 0;
+    *mat = malloc(line*sizeof(char*));
     for(i=0;i<line;i++)
-        mat[i] = (char*)malloc(column*sizeof(char));
+        (*mat)[i] = (char*)malloc(column*sizeof(char));
 }
 
 void checkCoordinates(FILE *inputFile, int *e, int *s){
@@ -71,7 +71,7 @@ void checkCoordinates(FILE *inputFile, int *e, int *s){
         ey[j] = coordinates[i];
         i++;
         j++;
-    }while(coordinates != ' ');
+    }while(coordinates[i] != ' ');
     
     i++;
     j = 0;
@@ -79,7 +79,7 @@ void checkCoordinates(FILE *inputFile, int *e, int *s){
         sx[j] = coordinates[i];
         i++;
         j++;
-    }while(coordinates != ' ');
+    }while(coordinates[i] != ' ');
 
     i++;
     j = 0;
@@ -87,7 +87,7 @@ void checkCoordinates(FILE *inputFile, int *e, int *s){
         sy[j] = coordinates[i];
         i++;
         j++;
-    }while(coordinates != '\n');
+    }while(coordinates[i] != '\n');
 
     e[0] = atoi(ex);
     e[1] = atoi(ey);
@@ -95,11 +95,11 @@ void checkCoordinates(FILE *inputFile, int *e, int *s){
     s[1] = atoi(sy);
 }
 
-void mountMat(FILE *inputeFile, char **mat, int column, int *e, int *s){
+void mountMat(FILE *inputeFile, char ***mat, int column, int *e, int *s){
     int i,lin = 0;
     char *string;
 
-    string = (char*)malloc(column+2*sizeof(char));
+    string = (char*)malloc(column*sizeof(char));
 
     /*Problema de falha de segmentação, o comando fgets está copiando apenas 9 caracteres para a 
     variavel string*/
@@ -109,15 +109,16 @@ void mountMat(FILE *inputeFile, char **mat, int column, int *e, int *s){
     fseek(inputeFile,0,SEEK_CUR);
     while(fgets(string,column+1,inputeFile)){
         for(i=0;i<column;i++){
-            mat[lin][i] = string[i];
+            (*mat)[lin][i] = string[i];
         }
         lin++;
+        fseek(inputeFile,1,SEEK_CUR);
         fseek(inputeFile,0,SEEK_CUR);
     }
 
     //Inserindo as letras E e S na Entrada e Saída do Labirinto
-    mat[e[0]][e[1]] = 'E';
-    mat[s[0]][s[1]] = 'S';
+    (*mat)[e[0]][e[1]] = 'E';
+    (*mat)[s[0]][s[1]] = 'S';
 }
 
 int checkIntegrity(char **mat, int line, int column){

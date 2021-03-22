@@ -1,0 +1,8 @@
+Criar uma matriz auxiliar para alteração, manter a matriz base para copiar para a auxiliar
+
+fazer o robo percorrer a matriz auxiliar armazenando as coordenadas ja passadas numa lista para verificar caso
+ocorra algum tipo de loop, assim verificando na lista se ja foi passado por essa coordenada ou não
+descobrir se existe mais de um caminho, ao encontrar um caminho, preencher todo o resto da matriz com # deixando
+apenas o caminho válido, armazenar essa matriz com o caminho valido no arquivo "results", caso houver mais de um
+caminho, copiar a matriz base para a matriz aux novamente e percorrer o caminho testando outro caminho, assim 
+repetindo o processo preenchendo a matriz de # e salvando no arquivo "results"

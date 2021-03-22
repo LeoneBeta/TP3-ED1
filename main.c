@@ -9,16 +9,11 @@
 #include "mLabirint.h"
 #include "labirint.h"
 
-int main(){
+int main(int argc, char *argv[]){
     setlocale(LC_ALL,"portuguese");
     
     FILE *inputFile, *outputFile;
-
-    TList *l = (TList*)malloc(sizeof(TList));
-    TStack *s = (TStack*)malloc(sizeof(TStack));
-
     char nameInputFile[20], nameOutputFile[20];
-    
     int i, j, integrity;
 
     //Matriz
@@ -27,17 +22,14 @@ int main(){
     int coordinatesE[2], coordinatesS[2];
     int *ptrE, *ptrS;
 
-    ptrE = &coordinatesE;
-    ptrS = &coordinatesS;
+    TList *l = (TList*)malloc(sizeof(TList));
+    TStack *s = (TStack*)malloc(sizeof(TStack));
 
-    setbuf(stdin,NULL);
-    printf("Nome do arquivo de entrada: ");
-    fgets(nameInputFile,20,stdin);
-    removeEnter(nameInputFile);
-    setbuf(stdin,NULL);
-    printf("Nome do arquivo de saída: ");
-    fgets(nameOutputFile,20,stdin);
-    removeEnter(nameOutputFile);
+    ptrE = coordinatesE;
+    ptrS = coordinatesS;
+
+    strcpy(nameInputFile,argv[1]);
+    strcpy(nameOutputFile,argv[2]);
 
     //Abertura do arquiv de Entrada e verificação
     inputFile = fopen(nameInputFile,"a+");
@@ -54,16 +46,16 @@ int main(){
     printf("\nNúmero de Colunas: %d",column);
     
     //Aloca a Matriz dinâmica
-    allocMat(mat,line,column);
+    allocMat(&mat,line,column);
 
     //Faz a leitura da segunda linha da Matriz onde contém as coordenadas de Entrada e Saída
     checkCoordinates(inputFile,ptrE,ptrS);
-
+    printf("\nCoordenadas");
+    printf("\nex: %d - ey: %d",ptrE[0],ptrE[1]);
+    printf("\nsx: %d - sy: %d",ptrS[0],ptrS[1]);
 
     //Monta a matriz retirando os dados do arquivo de entrada
-    mountMat(inputFile,mat,column,ptrE,ptrS);
-
-    //Setar a entrada e saida com as letras E e S nas suas determinadas posições
+    mountMat(inputFile,&mat,column,ptrE,ptrS);
     
     //Checa a Integridade da matriz
     //Retornos da Função
@@ -89,7 +81,7 @@ int main(){
     solutionLabirint(l,s,*mat);
     
     */
-    printf("\nMatriz fornecida no arquivo %s",nameInputFile);
+    printf("\nMatriz fornecida no arquivo %s\n",nameInputFile);
     printLabirint(mat,line,column);
 
     /*Desenvolver a etapa de printar os resultados */

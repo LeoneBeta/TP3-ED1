@@ -1,9 +1,10 @@
 #ifndef STACK_H_INCLUDED
 #define STACK_H_INCLUDED
 
-typedef char TKeyStack;
 typedef struct{
-    TKeyStack key;
+    int coordX,coordY;
+    int left,up,right,down;
+    int lastMove;
 }TElementStack;
 
 typedef struct NodoStack{

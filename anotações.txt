@@ -6,3 +6,11 @@ descobrir se existe mais de um caminho, ao encontrar um caminho, preencher todo 
 apenas o caminho válido, armazenar essa matriz com o caminho valido no arquivo "results", caso houver mais de um
 caminho, copiar a matriz base para a matriz aux novamente e percorrer o caminho testando outro caminho, assim 
 repetindo o processo preenchendo a matriz de # e salvando no arquivo "results"
+
+Arquivo labirint.c - continuar a implementação da solução do labirinto, ja está verificado se existe caminho
+para proceguir, e qual a direção em que o robo veio, (seu ultimo movimento)
+
+toda estrutura de leitura e carregamento do labirinto ja foi implementada, restando apenas a solução
+
+Solução de movimento do robo completa, faltando debugar
+Proximo passo é resolução de retorno do robo caso encontrar um caminho sem saída

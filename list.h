@@ -5,6 +5,7 @@
 typedef int TKeyList;
 typedef struct{
     TKeyList key;
+    int coordX,coordY;
 }TElementList;
 
 typedef struct NodoList{

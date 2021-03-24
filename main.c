@@ -105,7 +105,8 @@ int main(/*int argc, char *argv[]*/){
     //Printar a Matriz
     printLabirint(mat,line,column);
 
-    /*Desenvolver a etapa de armazenar os resultados em arquivo*/
+    //Gravar a matriz resultado no arquivo fornecido
+    writeToFile(outputFile,mat,line,column);
 
     //Desaloca a Matriz
     endMat(mat,line);
@@ -113,6 +114,7 @@ int main(/*int argc, char *argv[]*/){
     //Finaliza a Lista e Pilha
     deleteList(l);
     endStack(s);
+    endStack(newStack);
 
     //Fecha os arquivos
     fclose(inputFile);

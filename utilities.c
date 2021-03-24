@@ -22,3 +22,20 @@ void textConverter(char string[]){
         i++;
     }while(string[i]!= '\0');
 }
+
+void writeToFile(FILE *outputFile, char **mat, int line,int column){
+	int i=0,j=0;
+	fseek(outputFile,0,SEEK_SET);
+
+	do{
+		do{
+			fprintf(outputFile,"%c",mat[i][j]);
+			fseek(outputFile,0,SEEK_CUR);
+			j++;
+		}while(j<column);
+		fprintf(outputFile,"\n");
+		fseek(outputFile,0,SEEK_CUR);
+		i++;
+		j=0;
+	}while(i<line);
+}

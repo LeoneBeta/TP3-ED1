@@ -3,5 +3,6 @@
 
 void removeEnter(char []);
 void textConverter(char []);
+void writeToFile(FILE*,char**,int,int);
 
 #endif

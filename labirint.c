@@ -69,6 +69,13 @@ void solutionLabirint(list l, stack s, char **mat, int *ptrE){
         }else{ //Caso não hover movimentações possiveis, o robo retorna até a ultima encrusilhada
             turnBack(l,s,eStack);
         }
+
+        //Caso o retorno do caminho esvazie a pilha, quer dizer que não tem caminhos possíveis no labirinto
+        if(!s->top){
+            printf("\nSem caminhos possíveis");
+            break;
+        }
+
     }while(exit != 1);
 }
 
@@ -189,7 +196,27 @@ void moveDown(list l, stack s, TElementStack *eStack){
     
 }
 
-void turnBack(list l, stack s, TElementStack *eStack){}
+int turnBack(list l, stack s, TElementStack *eStack){
+    int crossroads = 0;
+    do{
+        if(!s->size)
+            break;
+        if(s->top->info.left == '0' && s->top->info.up == '0' && s->top->info.right == '0' && s->top->info.down == '0')
+            pop(s,eStack);
+        else
+            crossroads = 1;
+    }while(crossroads != 1);
+
+    //Reseto a struct eStack para a coordenada atual do topo da pilha e chamo o move para continuar a movimentaçaõ
+    eStack->coordX = s->top->info.coordX;
+    eStack->coordY = s->top->info.coordY;
+    eStack->left = s->top->info.left;
+    eStack->up = s->top->info.up;
+    eStack->right = s->top->info.right;
+    eStack->down = s->top->info.down;
+    eStack->lastMove = s->top->info.lastMove;
+    move(l,s,eStack);
+}
 
 int compareCoordinates(list l, TElementStack *eStack){
     int i=0;

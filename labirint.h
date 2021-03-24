@@ -7,7 +7,7 @@ void moveLeft(list,stack,TElementStack*);
 void moveUp(list,stack,TElementStack*);
 void moveRight(list,stack,TElementStack*);
 void moveDown(list,stack,TElementStack*);
-void turnBack(list,stack,TElementStack*);
+int turnBack(list,stack,TElementStack*);
 int compareCoordinates(list,TElementStack*);
 void printLabirint(char**,int,int);
 

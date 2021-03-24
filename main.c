@@ -9,7 +9,7 @@
 #include "mLabirint.h"
 #include "labirint.h"
 
-int main(/*int argc, char *argv[]*/){
+int main(int argc, char *argv[]){
     setlocale(LC_ALL,"portuguese");
     
     FILE *inputFile, *outputFile;
@@ -36,17 +36,8 @@ int main(/*int argc, char *argv[]*/){
     ptrS = coordinatesS;
 
     //Copia os nomes fornecidos por linha de comando para strings
-    //strcpy(nameInputFile,argv[1]);
-    //strcpy(nameOutputFile,argv[2]);
-
-    setbuf(stdin,NULL);
-    printf("Arquivo de entrada");
-    fgets(nameInputFile,20,stdin);
-    removeEnter(nameInputFile);
-    setbuf(stdin,NULL);
-    printf("Arquivo de saida");
-    fgets(nameOutputFile,20,stdin);
-    removeEnter(nameOutputFile);
+    strcpy(nameInputFile,argv[1]);
+    strcpy(nameOutputFile,argv[2]);
 
     //Abertura do arquiv de Entrada e verificação
     inputFile = fopen(nameInputFile,"a+");

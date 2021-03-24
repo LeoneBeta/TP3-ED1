@@ -5,6 +5,7 @@ typedef struct{
     int coordX,coordY;
     int left,up,right,down;
     int lastMove;
+    int exit;
 }TElementStack;
 
 typedef struct NodoStack{
@@ -22,6 +23,7 @@ stack creatStack();
 void endStack(stack);
 int push(stack,TElementStack);
 int pop(stack,TElementStack*);
+void invertStack(stack,stack);
 int fullStack(stack);
 int emptyStack(stack);
 int sizeStack(stack);

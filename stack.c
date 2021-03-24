@@ -46,6 +46,8 @@ int pop(stack s,TElementStack *e){
     return 1;
 }
 
+void invertStack(stack s, stack newStack){}
+
 int fullStack(stack s){
     TNodoStack *n;
     n = (TNodoStack*)malloc(sizeof(TNodoStack));

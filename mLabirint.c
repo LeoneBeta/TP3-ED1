@@ -20,7 +20,7 @@ void sizeMat(FILE *inputFile, int *line, int *column){
     fseek(inputFile,0,SEEK_SET);
     fgets(size,10,inputFile);
     do{
-        if(size[i] != 'x')
+        if(size[i] != ' ')
             stringLine[j] = size[i];
         else
             break;

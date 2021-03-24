@@ -9,27 +9,47 @@
 #include "mLabirint.h"
 #include "labirint.h"
 
-int main(int argc, char *argv[]){
+int main(/*int argc, char *argv[]*/){
     setlocale(LC_ALL,"portuguese");
     
     FILE *inputFile, *outputFile;
     char nameInputFile[20], nameOutputFile[20];
-    int i, j, integrity;
+    int i, j, integrity,noMove = 0;
 
     //Matriz
-    char **mat;
+    char **mat, **cpyMat;
     int line,column;
     int coordinatesE[2], coordinatesS[2];
     int *ptrE, *ptrS;
 
+    //Lista e Pilha principais
     TList *l = (TList*)malloc(sizeof(TList));
     TStack *s = (TStack*)malloc(sizeof(TStack));
+    //Lista e pilha auxiliares
+    TStack *copyS = (TStack*)malloc(sizeof(TStack));
+
+    TList *pathL = (TList*)malloc(sizeof(TList));
+
+    l = creatList();
+    pathL = creatList();
+    s = creatStack();
+    copyS = creatStack();
 
     ptrE = coordinatesE;
     ptrS = coordinatesS;
 
-    strcpy(nameInputFile,argv[1]);
-    strcpy(nameOutputFile,argv[2]);
+    //Copia os nomes fornecidos por linha de comando para strings
+    //strcpy(nameInputFile,argv[1]);
+    //strcpy(nameOutputFile,argv[2]);
+
+    setbuf(stdin,NULL);
+    printf("Arquivo de entrada");
+    fgets(nameInputFile,20,stdin);
+    removeEnter(nameInputFile);
+    setbuf(stdin,NULL);
+    printf("Arquivo de saida");
+    fgets(nameOutputFile,20,stdin);
+    removeEnter(nameOutputFile);
 
     //Abertura do arquiv de Entrada e verificação
     inputFile = fopen(nameInputFile,"a+");
@@ -46,8 +66,6 @@ int main(int argc, char *argv[]){
 
     //Faz a leitura da primeira linha do arquivo onde contám o tamanho da matriz
     sizeMat(inputFile,&line,&column);
-    printf("\nNúmero de Linhas: %d",line);
-    printf("\nNúmero de Colunas: %d",column);
     
     //Aloca a Matriz dinâmica
     allocMat(&mat,line,column);
@@ -77,9 +95,9 @@ int main(int argc, char *argv[]){
     //Caso a Matriz fornecida não for válida, o programa finaliza
     if(integrity != 0)
         return 0;
-    solutionLabirint(l,s,mat,ptrE);
 
-    /*Desenvolver a etapa de printar os resultados */
+    //Solução do Labirinto
+    solutionLabirint(l,s,mat,ptrE,line,column);
 
     /*Desenvolver a etapa de armazenar os resultados em arquivo*/
 

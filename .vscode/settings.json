@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "mlabirint.h": "c"
+        "mlabirint.h": "c",
+        "list.h": "c"
     }
 }

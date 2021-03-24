@@ -14,3 +14,5 @@ toda estrutura de leitura e carregamento do labirinto ja foi implementada, resta
 
 Solução de movimento do robo completa, faltando debugar
 Proximo passo é resolução de retorno do robo caso encontrar um caminho sem saída
+
+dia 24/03 00:48 - programa compilou se problemas, proximo passo desenvolver a etapa de retorno pelo labirinto

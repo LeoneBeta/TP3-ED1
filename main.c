@@ -33,13 +33,17 @@ int main(int argc, char *argv[]){
 
     //Abertura do arquiv de Entrada e verificação
     inputFile = fopen(nameInputFile,"a+");
-    if(!inputFile)
+    if(!inputFile){
         printf("Falha ao abrir o arquivo de Entrada %s",nameInputFile);
+        return 0;
+    }
     
     outputFile = fopen(nameOutputFile,"a+");
-    if(!outputFile)
+    if(!outputFile){
         printf("Falha ao abrir o arquivo de Saída %s",nameOutputFile);
-    
+        return 0;
+    }
+
     //Faz a leitura da primeira linha do arquivo onde contám o tamanho da matriz
     sizeMat(inputFile,&line,&column);
     printf("\nNúmero de Linhas: %d",line);
@@ -50,9 +54,6 @@ int main(int argc, char *argv[]){
 
     //Faz a leitura da segunda linha da Matriz onde contém as coordenadas de Entrada e Saída
     checkCoordinates(inputFile,ptrE,ptrS);
-    printf("\nCoordenadas");
-    printf("\nex: %d - ey: %d",ptrE[0],ptrE[1]);
-    printf("\nsx: %d - sy: %d",ptrS[0],ptrS[1]);
 
     //Monta a matriz retirando os dados do arquivo de entrada
     mountMat(inputFile,&mat,column,ptrE,ptrS);
@@ -73,24 +74,21 @@ int main(int argc, char *argv[]){
     if(integrity == 3)
         printf("\nMatriz contém uma falha nas suas bordas");
 
-    /*
-    //Desenvolver a etapa de resolução do labirinto
     //Caso a Matriz fornecida não for válida, o programa finaliza
     if(integrity != 0)
         return 0;
-    solutionLabirint(l,s,*mat);
-    
-    */
-    printf("\nMatriz fornecida no arquivo %s\n",nameInputFile);
-    printLabirint(mat,line,column);
+    solutionLabirint(l,s,mat,ptrE);
 
     /*Desenvolver a etapa de printar os resultados */
 
     /*Desenvolver a etapa de armazenar os resultados em arquivo*/
 
-
     //Desaloca a Matriz
     endMat(mat,line);
+
+    //Finaliza a Lista e Pilha
+    deleteList(l);
+    endStack(s);
 
     //Fecha os arquivos
     fclose(inputFile);

@@ -83,28 +83,24 @@ int removeElement(list l, TKeyList key, TElementList *e){
     n = l->first;
 
     while(n){
-        if(n->info.key == key){
-            if(l->size == 1){ //A Lista possui um unico Nodo
-                l->first = NULL;
-                l->last = NULL;
+        if(l->size == 1){ //A Lista possui um unico Nodo
+            l->first = NULL;
+            l->last = NULL;
+        }else
+            if(n == l->first){ //Removendo o primeiro Nodo
+                l->first = l->first->next;
+                l->first->prior = NULL;
             }else
-                if(n == l->first){ //Removendo o primeiro Nodo
-                    l->first = l->first->next;
-                    l->first->prior = NULL;
-                }else
-                    if(n == l->last){ //Removendo o último Nodo
-                        l->last = l->last->prior;
-                        l->last->next = NULL;
-                    }else{ //Removendo um Nodo interno
-                        n->prior->next = n->next;
-                        n->next->prior = n->prior;
-                    }
-                    *e = n->info;
-                    free(n);
-                    return 1;
-        }else{
-            n = n->next;
-        }
+                if(n == l->last){ //Removendo o último Nodo
+                    l->last = l->last->prior;
+                    l->last->next = NULL;
+                }else{ //Removendo um Nodo interno
+                    n->prior->next = n->next;
+                    n->next->prior = n->prior;
+                }
+                *e = n->info;
+                free(n);
+                return 1;
     }
     return 0;
 }

@@ -9,8 +9,7 @@ void moveRight(list,stack,TElementStack*);
 void moveDown(list,stack,TElementStack*);
 int turnBack(list,stack,TElementStack*);
 int compareCoordinates(list,int,int);
-void pathList(list,stack);
-void path(list,char***,int,int);
+void createPath(stack,char***,int,int,int*,int*);
 void printLabirint(char**,int,int);
 
 #endif

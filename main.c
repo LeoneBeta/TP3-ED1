@@ -25,15 +25,12 @@ int main(/*int argc, char *argv[]*/){
     //Lista e Pilha principais
     TList *l = (TList*)malloc(sizeof(TList));
     TStack *s = (TStack*)malloc(sizeof(TStack));
-    //Lista e pilha auxiliares
-    TStack *copyS = (TStack*)malloc(sizeof(TStack));
-
-    TList *pathL = (TList*)malloc(sizeof(TList));
+    //Pilha auxiliar
+    TStack *newStack = (TStack*)malloc(sizeof(TStack));
 
     l = creatList();
-    pathL = creatList();
     s = creatStack();
-    copyS = creatStack();
+    newStack = creatStack();
 
     ptrE = coordinatesE;
     ptrS = coordinatesS;
@@ -98,6 +95,15 @@ int main(/*int argc, char *argv[]*/){
 
     //Solução do Labirinto
     solutionLabirint(l,s,mat,ptrE,line,column);
+
+    //Cria uma pilha invertendo a ordem dos nodos
+    invertStack(s,newStack);
+
+    //Cria a matriz com solução do labirinto
+    createPath(newStack,&mat,line,column,ptrE,ptrS);
+
+    //Printar a Matriz
+    printLabirint(mat,line,column);
 
     /*Desenvolver a etapa de armazenar os resultados em arquivo*/
 

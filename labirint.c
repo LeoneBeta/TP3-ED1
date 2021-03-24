@@ -28,9 +28,6 @@ void solutionLabirint(list l, stack s, char **mat, int *ptrE, int line, int colu
         eStack.right = 0;
         eStack.down = 0;
         
-
-
-
         //Verificando os possiveis caminhos da coordenada atual e comparando se o caminho seguinte já foi percorrido
         //Caso ambas as validações forem verdadeiras, é um caminho possível
         //Esquerda
@@ -222,43 +219,21 @@ int compareCoordinates(list l, int coordX, int coordY){
     }while(i<l->size);
     return 0;           //Retorna 0 caso não encontre uma coordenada igual na lista
 }
-/*
-void pathList(list pathL, stack copyS){
-    TElementList *auxL;
-    TElementStack *auxS;
 
-    while(copyS->size != 0){
-        pop(copyS,auxS);
-        auxL->coordX = auxS->coordX;
-        auxL->coordY = auxS->coordY;
-        insertEnd(pathL,*auxL);
-    }
-}
-
-void path(list pathL, char ***cpyMat, int line, int column){
-    int i,j,ok;
-
-    TStack *auxS = (TStack*)malloc(sizeof(TStack));
-
-    for(i=0;i,line;i++){
+void createPath(stack s, char ***mat,int line, int column, int *ptrE, int *ptrS){
+    int i,j;
+    TElementStack e;
+    for(i=0;i<line;i++){
         for(j=0;j<column;j++){
-            pathL->current = pathL->first;
-            do{
-                if(pathL->current->info.coordX == i && pathL->current->info.coordY == j){
-                    ok = 1;
-                    break;
-                }
-                pathL->current = pathL->current->next;
-            }while(pathL->current != NULL);
-
-            if(ok != 1)
-                cpyMat[i][j] = '#';
-            ok = 0;
+            (*mat)[i][j] = '#';
         }
     }
-
+    do{
+        pop(s,&e);
+        (*mat)[e.coordX][e.coordY] = '0';
+    }while(s->size != 0);
 }
-*/
+
 void printLabirint(char **mat, int line, int column){
     int i, j;
     for(i=0;i<line;i++){

@@ -46,7 +46,13 @@ int pop(stack s,TElementStack *e){
     return 1;
 }
 
-void invertStack(stack s, stack newStack){}
+void invertStack(stack s, stack newStack){
+    TElementStack eStack;
+    do{
+        pop(s,&eStack);
+        push(newStack,eStack);
+    }while(s->size != 0);
+}
 
 int fullStack(stack s){
     TNodoStack *n;

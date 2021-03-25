@@ -9,7 +9,7 @@
 #include "mLabirint.h"
 #include "labirint.h"
 
-int main(int argc, char *argv[]){
+int main(/*int argc, char *argv[]*/){
     setlocale(LC_ALL,"portuguese");
     
     FILE *inputFile, *outputFile;
@@ -36,8 +36,17 @@ int main(int argc, char *argv[]){
     ptrS = coordinatesS;
 
     //Copia os nomes fornecidos por linha de comando para strings
-    strcpy(nameInputFile,argv[1]);
-    strcpy(nameOutputFile,argv[2]);
+    //strcpy(nameInputFile,argv[1]);
+    //strcpy(nameOutputFile,argv[2]);
+
+    setbuf(stdin,NULL);
+    printf("Arquivo de entrada");
+    fgets(nameInputFile,20,stdin);
+    removeEnter(nameInputFile);
+    setbuf(stdin,NULL);
+    printf("Arquivo de saida");
+    fgets(nameOutputFile,20,stdin);
+    removeEnter(nameOutputFile);
 
     //Abertura do arquiv de Entrada e verificação
     inputFile = fopen(nameInputFile,"a+");
@@ -62,7 +71,7 @@ int main(int argc, char *argv[]){
     checkCoordinates(inputFile,ptrE,ptrS);
 
     //Monta a matriz retirando os dados do arquivo de entrada
-    mountMat(inputFile,&mat,column,ptrE,ptrS);
+    mountMat(inputFile,&mat,line,column,ptrE,ptrS);
     
     //Checa a Integridade da matriz
     //Retornos da Função

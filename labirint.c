@@ -204,7 +204,7 @@ int turnBack(list l, stack s, TElementStack *eStack){
     eStack->right = s->top->info.right;
     eStack->down = s->top->info.down;
     eStack->lastMove = s->top->info.lastMove;
-    
+
     move(l,s,eStack);
 }
 

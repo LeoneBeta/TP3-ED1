@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mLabirint.h"
+#include "utilities.h"
 
 void sizeMat(FILE *inputFile, int *line, int *column){
     int i, j;
@@ -95,25 +96,20 @@ void checkCoordinates(FILE *inputFile, int *e, int *s){
     s[1] = atoi(sy);
 }
 
-void mountMat(FILE *inputeFile, char ***mat, int column, int *e, int *s){
+void mountMat(FILE *inputeFile, char ***mat, int line, int column, int *e, int *s){
     int i,lin = 0;
     char *string;
 
-    string = (char*)malloc(column*sizeof(char));
-
-    /*Problema de falha de segmentação, o comando fgets está copiando apenas 9 caracteres para a 
-    variavel string*/
-
-    //Testar o fgets com column+1
+    string = (char*)malloc(column+2*sizeof(char));
 
     fseek(inputeFile,0,SEEK_CUR);
-    while(fgets(string,column+1,inputeFile)){
-        for(i=0;i<column;i++){
+    while(fgets(string,column+1,inputeFile) && lin<line){
+        
+        for(i=0;i<column+1;i++){
             (*mat)[lin][i] = string[i];
         }
         lin++;
-        fseek(inputeFile,1,SEEK_CUR);
-        fseek(inputeFile,0,SEEK_CUR);
+        fgets(string,column+1,inputeFile);
     }
 
     //Inserindo as letras E e S na Entrada e Saída do Labirinto

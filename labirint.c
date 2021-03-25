@@ -168,7 +168,7 @@ void moveRight(list l, stack s, TElementStack *eStack){
 void moveUp(list l, stack s, TElementStack *eStack){
     TElementList eList;
     eStack->coordX -=1;
-    eStack->lastMove== 2;
+    eStack->lastMove = 2;
     s->top->info.up = 0;
     eList.coordX = eStack->coordX;
     eList.coordY = eStack->coordY;

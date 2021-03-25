@@ -9,7 +9,7 @@
 #include "mLabirint.h"
 #include "labirint.h"
 
-int main(/*int argc, char *argv[]*/){
+int main(int argc, char *argv[]){
     setlocale(LC_ALL,"portuguese");
     
     FILE *inputFile, *outputFile;
@@ -36,17 +36,8 @@ int main(/*int argc, char *argv[]*/){
     ptrS = coordinatesS;
 
     //Copia os nomes fornecidos por linha de comando para strings
-    //strcpy(nameInputFile,argv[1]);
-    //strcpy(nameOutputFile,argv[2]);
-
-    setbuf(stdin,NULL);
-    printf("Arquivo de entrada");
-    fgets(nameInputFile,20,stdin);
-    removeEnter(nameInputFile);
-    setbuf(stdin,NULL);
-    printf("Arquivo de saida");
-    fgets(nameOutputFile,20,stdin);
-    removeEnter(nameOutputFile);
+    strcpy(nameInputFile,argv[1]);
+    strcpy(nameOutputFile,argv[2]);
 
     //Abertura do arquiv de Entrada e verificação
     inputFile = fopen(nameInputFile,"a+");
@@ -81,13 +72,13 @@ int main(/*int argc, char *argv[]*/){
     //3 = Existe algum "buraco" nas bordas da matriz
     integrity = checkIntegrity(mat,line,column);
     if(integrity == 0)
-        printf("\nMatriz Integra");
+        printf("\nMatriz Integra\n");
     if(integrity == 1)
-        printf("\nNúmero inválido de Entradas");
+        printf("\nNúmero inválido de Entradas\n");
     if(integrity == 2)
-        printf("\nNúmero inválido de Saídas");
+        printf("\nNúmero inválido de Saídas\n");
     if(integrity == 3)
-        printf("\nMatriz contém uma falha nas suas bordas");
+        printf("\nMatriz contém uma falha nas suas bordas\n");
 
     //Caso a Matriz fornecida não for válida, o programa finaliza
     if(integrity != 0)
